@@ -13,3 +13,9 @@ import Cookies from 'js-cookie';
 
 </script>
 
+<style>
+#app {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+</style>
+

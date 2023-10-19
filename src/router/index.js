@@ -6,7 +6,7 @@ import MyClassView from "../views/MyClassView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import NotFound from "../views/NotFound.vue";
-
+import TrainingDetail from "@/views/TrainingDetail.vue";
 import axios from "axios";
 import Cookies from "js-cookie";
 const router = createRouter({
@@ -22,7 +22,7 @@ const router = createRouter({
     {
       path: "/detail-products/:id",
       name: "detail_products",
-      component: "",
+      component: TrainingDetail,
     },
     {
       path: "/products",

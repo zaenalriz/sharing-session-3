@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-const API = "http://127.0.0.1:9000/api";
+const API = "https://serverwan.com/lms-ultima/api-lms/public/api";
 
 async function get(url, params, header = false) {
   let response;

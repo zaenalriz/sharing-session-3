@@ -6,9 +6,7 @@
                 class="card-img-top" alt="...">
         </div>
         <div class="card-body">
-            <h5 class="card-title">{{ product.title }}</h5>
-            <span>Review({{ product.reviews_count }})</span>
-            <p class="card-text">Rp {{ product.price }}</p>
+            <h5 class="card-title">{{ product.training.title }}</h5>
             <router-link class="btn btn-primary" :to="{
                 name: 'detail_products', params: {
                     id: product.id

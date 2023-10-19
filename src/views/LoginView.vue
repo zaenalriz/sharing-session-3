@@ -9,28 +9,32 @@
                     </div>
                     <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <form @submit.prevent="login">
-                            <h3>Register</h3>
+                            <h3 class="mb-3">Selamat datang</h3>
                             <div class="alert alert-danger" v-if="error">{{ error }}</div>
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <input type="email" v-model="form.email" id="form3Example3"
-                                    class="form-control form-control-lg" placeholder="Enter a valid email address" />
-                                <label class="form-label" for="form3Example3">Email address</label>
+                                <MDBInput label="Masukan email" size="lg" v-model="form.email" />
                             </div>
 
                             <!-- Password input -->
-                            <div class="form-outline mb-3">
-                                <input type="password" v-model="form.password" id="form3Example4"
-                                    class="form-control form-control-lg" placeholder="Enter password" />
-                                <label class="form-label" for="form3Example4">Password</label>
-                            </div>
+                            <MDBInput label="Masukan password" size="lg" type="password" v-model="form.password" />
+
 
 
                             <div class="text-center text-lg-start mt-4 pt-2">
                                 <button type="submit" class="btn btn-primary btn-lg"
-                                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+                                    style="padding-left: 2.5rem; padding-right: 2.5rem;">
+                                    <div class="spinner-border text-primary" role="status" v-if="loading">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div v-else>
+                                        Login
+                                    </div>
+                                </button>
                                 <p class="small fw-bold mt-2 pt-1 mb-0">Belum punya akun?
-                                    <router-link :to="{ name: 'register' }" class="link-danger">Register</router-link>
+                                    <router-link :to="{ name: 'register' }" class="link-danger">
+                                        Register
+                                    </router-link>
                                 </p>
                             </div>
 
@@ -43,7 +47,7 @@
     </Layout>
 </template>
 <script>
-
+import { MDBInput } from 'mdb-vue-ui-kit';
 import Cookies from 'js-cookie';
 import { post } from '@/Api/index.js';
 import Layout from '@/views/Layout.vue';
@@ -51,7 +55,8 @@ import Layout from '@/views/Layout.vue';
 export default {
 
     components: {
-        Layout
+        Layout,
+        MDBInput
     },
     props: ['islogin'],
     data() {
@@ -61,18 +66,21 @@ export default {
                 password: '',
                 institution_id: 1
             },
-            error: false
+            error: false,
+            loading: false
         }
     },
 
     methods: {
 
         async login() {
+            this.loading = true;
             let response = await post('/login', this.form);
             if (!response.success) {
                 this.error = response.message;
                 return;
             }
+            this.loading = false;
             Cookies.set('X-TOKEN-APP', response.data.access_token);
             this.$router.push({ name: 'home' });
         }

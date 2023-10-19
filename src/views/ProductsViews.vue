@@ -18,10 +18,14 @@
 <script>
 import Product from '@/components/Products/Product.vue';
 import Layout from '@/views/Layout.vue';
+
 export default {
     components: {
         Product,
         Layout
+    },
+    async created() {
+
     }
 }
 </script>

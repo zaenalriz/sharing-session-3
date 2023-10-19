@@ -2,7 +2,12 @@
   <Layout>
 
     <div class="container my-5">
-      <input type="text" placeholder="search" @keyup="search" class="form-control">
+      <MDBInput @keyup="search" inputGroup :formOutline="false" wrapperClass="mb-3" placeholder="Search"
+        aria-label="Search" aria-describedby="button-addon2">
+        <MDBBtn color="primary">
+          <MDBIcon icon="search" />
+        </MDBBtn>
+      </MDBInput>
       <div class="row justify-content-center">
         <div class="col-lg-2">
           <h4>Kelas kami</h4>
@@ -21,11 +26,15 @@ import Product from '@/components/Products/Product.vue';
 import { get } from '@/Api/index.js';
 import Navbar from '@/components/Layouts/Navbar.vue';
 import Layout from '@/views/Layout.vue';
+import { MDBInput, MDBBtn, MDBIcon } from 'mdb-vue-ui-kit';
 export default {
   components: {
     Product,
     Navbar,
-    Layout
+    Layout,
+    MDBInput,
+    MDBBtn,
+    MDBIcon
   },
   data() {
     return {

@@ -1,58 +1,86 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="@/assets/logo.png" alt="logo" id="logo" class="rounded">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end w-100">
-                    <li class="nav-item mx-2">
-                        <router-link class="nav-link " :class="{ active: $route.name == 'home' }"
-                            :to="{ name: 'home' }">Home</router-link>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link " aria-current="page" href="#">Keranjang</a>
-                    </li>
-                    <li class="nav-item mx-2" v-if="!profile">
-                        <router-link class="nav-link" :class="{ active: $route.name == 'login' }"
-                            :to="{ name: 'login' }">Login</router-link>
-                    </li>
-                    <li class="nav-item dropdown" v-else>
-                        <a class="nav-link dropdown-toggle" :class="{ active: $route.name == 'myclass' }" href="#"
-                            id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ profile.name }}
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li> <router-link class="dropdown-item" :to="{ name: 'profile' }">My profile</router-link></li>
-                            <li> <router-link class="dropdown-item" :to="{ name: 'myclass' }">My class</router-link></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
+    <MDBNavbar container expand="lg" bg="light" class=" d-flex justify-content-between">
 
-                </ul>
+        <MDBNavbarBrand>
+            <MDBIcon icon="mdb" iconStyle="fab" size="2x" />
+        </MDBNavbarBrand>
+        <MDBNavbarToggler target="#navbarColor01" @click="collapse7 = !collapse7"></MDBNavbarToggler>
+        <MDBCollapse id="navbarColor01" class="" v-model="collapse7">
+            <MDBNavbarNav class="mb-2 mb-lg-0 d-flex justify-content-center w-100">
+                <MDBNavbarItem class="mx-2" linkClass="link-secondary" :to="{ name: 'home' }">Home
+                </MDBNavbarItem>
+                <MDBNavbarItem class="mx-2">
+                    <MDBDropdown class="nav-item" v-model="dropdown8">
+                        <MDBDropdownToggle tag="a" class="nav-link " @click="dropdown8 = !dropdown8">Aktifitas
+                        </MDBDropdownToggle>
+                        <MDBDropdownMenu>
+                            <MDBDropdownItem :to="{ name: 'myclass' }"> Myclass </MDBDropdownItem>
+                            <MDBDropdownItem href="#">Another Action</MDBDropdownItem>
+                            <MDBDropdownItem href="#">Something else here</MDBDropdownItem>
+                        </MDBDropdownMenu>
+                    </MDBDropdown>
+                </MDBNavbarItem>
+            </MDBNavbarNav>
 
-            </div>
-        </div>
-    </nav>
+        </MDBCollapse>
+
+        <MDBNavbarNav class="mb-2 mb-lg-0 d-flex flex-row">
+            <MDBNavbarItem to="#" class="me-3 me-lg-0" linkClass="link-secondary">
+                <MDBIcon icon="shopping-cart"></MDBIcon>
+            </MDBNavbarItem>
+            <MDBNavbarItem to="#" class="me-3 me-lg-0" linkClass="link-secondary">
+                <MDBIcon icon="bell" />
+                <MDBBadge notification color="danger" pill>1</MDBBadge>
+            </MDBNavbarItem>
+            <MDBNavbarItem href="#" class="me-3 me-lg-0">
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22" alt=""
+                    loading="lazy" />
+            </MDBNavbarItem>
+        </MDBNavbarNav>
+    </MDBNavbar>
 </template>
 
 <script>
-import { getWithHeader } from '@/Api/index.js';
+import {
+    MDBNavbar,
+    MDBNavbarItem,
+    MDBNavbarBrand,
+    MDBNavbarNav,
+    MDBNavbarToggler,
+    MDBBadge,
+    MDBIcon,
+    MDBCollapse,
+    MDBDropdown,
+    MDBDropdownToggle,
+    MDBDropdownMenu,
+    MDBDropdownItem
+} from 'mdb-vue-ui-kit';
+import { ref } from "vue";
 
 export default {
-
-    data() {
-        return {
-            profile: true
-        }
+    components: {
+        MDBNavbar,
+        MDBNavbarItem,
+        MDBNavbarBrand,
+        MDBNavbarNav,
+        MDBNavbarToggler,
+        MDBBadge,
+        MDBIcon,
+        MDBCollapse,
+        MDBDropdown,
+        MDBDropdownToggle,
+        MDBDropdownMenu,
+        MDBDropdownItem
     },
-}
+    setup() {
+        const collapse7 = ref(false);
+        const profile = ref(true);
+        const dropdown8 = ref(false);
+        return {
+            collapse7,
+            profile,
+            dropdown8
+        }
+    }
+};
 </script>
